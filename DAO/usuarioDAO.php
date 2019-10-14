@@ -44,27 +44,43 @@ Class UsuarioDAO{
         function update (Usuario $dto){
             try {
                 $conn = getConexao();
+                
 
-
-                $stmt = $dto->prepare("UPDATE Usuario SET nome=?, email=?, senha=? , cpf=? WHERE id=?");
+                $stmt = $conn->prepare("UPDATE Usuario SET nome=?, email=?, senha=?  WHERE cpf=?");
                 $stmt = $dto->bindValue(1 , $dto->getNome(), PDO::PARAM_STR);
-                $stmt = $dto->bindValue(2 , $dto->getEmail, PDO::PARAM_STR);
+                $stmt = $dto->bindValue(2 , $dto->getEmail(), PDO::PARAM_STR);
                 $stmt = $dto->bindValue(3 , $dto->getSenha(), PDO::PARAM_STR);
                 $stmt = $dto->bindValue(4 , $dto->getCpf(), PDO::PARAM_INT);
-                $stmt = $dto->bindValue(4 , $dto->getCpf(), PDO::PARAM_INT);
-   
+              
+                
                $stmt->execute();
-   
-               ParticipacaoDAO::deleteAllFromAluno($dto->getId());
-               
-               foreach ($dto->getParticipacoes() as $key => $participacao) {
-                   ParticipacaoDAO::create($dto->getId(), $participacao->getDisciplina()->getId(), $participacao->getSemestre());
+                echo 'dados alterados com sucesso';
                }
            
            } catch (Throwable $th) {
            $e = new Exception('Erro ao atualizar usuário <br>'.$th->getMEssage());
                throw $e;
            }
+        }
+        
+        function delete(Usuario $dto){
+               
+            try {
+            $conn = getConexao();
+
+            $sql = "DELETE FROM usuario WHERE cpf=?";
+
+            $stmt = $conn->prepare($sql);
+
+            $stmt->bindValue(1, $dto->getCpf(), PDO::PARAM_INT);
+
+=
+            $stmt->execute();
+
+            }catch (Throwable $th) {
+                $e = new Exception('Erro ao remover usuário <br>'.$th->getMEssage());
+                    throw $e;
+                } 
 
 
 
