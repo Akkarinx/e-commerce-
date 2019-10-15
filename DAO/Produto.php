@@ -8,7 +8,7 @@ class Produto {
     private $preco;
 
 
-    
+    function __construct(){
     public function getId()
     {
         return $this->id;
@@ -63,4 +63,5 @@ class Produto {
 
         return $this;
     }
+}
 }
