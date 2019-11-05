@@ -4,30 +4,56 @@ body{
     font-family: Arial, Helvetica, sans-serif;
 
 }
-.header {
-    background: f7f3eb;
+header {
+    
+   background: #f7f3eb; 
     height: 75px ;
     width: 1400px;
    
+    
 }
 
 .header_menu{
+    padding-top: 10px;
 text-align: right;
+
 
 }
 
 .header_menu ul li {
+    
     display: inline;
 text-transform: uppercase;
 
-
 }
 
 
-.inicial{
-height: 495px;
+.apresentação{
+height: 300px;
 width: 1400px;
 background-image: url(../img/header.jpg);
+text-align: center;
+padding-top: 75px;
+
+}
+
+.apresentação h1{
+    text-transform: uppercase;
 
 
 }
+
+.cadastro {
+    width: 600px;
+    height: 250px;
+    background: #f7f3eb;
+    border-style: solid !important;
+    border-color: #007bff !important;
+    border: 80px !important;
+      
+      
+   
+}
+
+
+

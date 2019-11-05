@@ -1,49 +1,39 @@
-
 <?php
 
 include_once "../conexao.php";
-include_once '/DAO/Produto.php';
 
 
+Class UsuarioDAO{
 
-Class ProdutoDAO{
-
-  static  function create ( Produto $dto){
+    function create ( Usuario $dto){
         
         $conn = getConexao()
-        //criando SQL comando enviado para o banco de dados.
-        $sql = "INSERT INTO produtos (nome , quantidade , preco ) VALUES (? , ? , ?)";
 
-        //enviando a querry para o banco
+        $sql = "INSERT INTO usuario (nome , email , senha , cpf) VALUES (? , ? , ? , ?)";
+
+
         $stmt = $conn->prepare($sql)
 
-        //setando os valores capturados.
-        $stmt = $conn->bindValue(1 , $dto);
-        $stmt = $conn->bindValue(2 , $dto);
-        $stmt = $conn->bindValue(3 , $dto);
-
+        $stmt = $conn->bindValue(1 , $dto->getNome(), PDO::PARAM_STR);
+        $stmt = $conn->bindValue(2 , $dto->getEmail(), PDO::PARAM_STR);
+        $stmt = $conn->bindValue(3 , $dto->getSenha(), PDO::PARAM_STR);
+        $stmt = $conn->bindValue(4 , $dto->getCpf(), PDO::PARAM_INT);
 
         $stmt->execute();
-        $id = $conn->lastInsertId();
-
-    }
 
 
         function read (){
 
             $conn = getConexao();
 
-            $sql = "SELECT * from produto";
+            $sql = "SELECT * from usuario";
 
             $stmt = $conn->Prepare($sql);
             
             $result = $stmt->fetchall();
 
             foreach ($result as $value) {
-                
                             }
-
-
 
 
 
@@ -51,16 +41,16 @@ Class ProdutoDAO{
 
         }
 
-        function update (Produto $dto){
+        function update (Usuario $dto){
             try {
                 $conn = getConexao();
                 
 
-                $stmt = $conn->prepare("UPDATE Usuario SET nome=?, quantidade=?, preco=?  WHERE cpf=?");
+                $stmt = $conn->prepare("UPDATE Usuario SET nome=?, email=?, senha=?  WHERE cpf=?");
                 $stmt = $dto->bindValue(1 , $dto->getNome(), PDO::PARAM_STR);
-                $stmt = $dto->bindValue(2 , $dto->getQuantidade(), PDO::PARAM_STR);
-                $stmt = $dto->bindValue(3 , $dto->getPreco(), PDO::PARAM_STR);
-                
+                $stmt = $dto->bindValue(2 , $dto->getEmail(), PDO::PARAM_STR);
+                $stmt = $dto->bindValue(3 , $dto->getSenha(), PDO::PARAM_STR);
+                $stmt = $dto->bindValue(4 , $dto->getCpf(), PDO::PARAM_INT);
               
                 
                $stmt->execute();
@@ -78,11 +68,11 @@ Class ProdutoDAO{
             try {
             $conn = getConexao();
 
-            $sql = "DELETE FROM produto WHERE id=?";
+            $sql = "DELETE FROM usuario WHERE cpf=?";
 
             $stmt = $conn->prepare($sql);
 
-            $stmt->bindValue(1, $dto->getId(), PDO::PARAM_INT);
+            $stmt->bindValue(1, $dto->getCpf(), PDO::PARAM_INT);
 
 =
             $stmt->execute();

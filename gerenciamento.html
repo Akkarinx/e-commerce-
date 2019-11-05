@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+    
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js" ></script>
+    <script src="js/cadastrar.js" ></script>
+
+    
+    <title>Gerenciamento</title>
+
+</head>
+
+<body>
+    <header>
+        <nav class="header_menu">
+
+            <ul>
+                <li> <a href="index.html"> home </a></li> &nbsp &nbsp
+                <li> <a href="login.html"> login </a></li> &nbsp &nbsp
+                <li> <a href="gerenciamento.html">gerenciamento</a> </li> &nbsp &nbsp
+                <li><a href="sacola.html">sacola</a></li> &nbsp &nbsp
+
+            </ul>
+        </nav>
+    </header>
+    <section class="apresentação">
+        <div>
+            <h1>Gerenciamento</h1>
+            <!-- #region Tag de citação-->
+            <blockquote>
+                <p>
+                    <p>"Não tem nada em sua casa que você não considere útil ou acredita ser bonito"</p>
+                    <cite>wiliam morris</cite>
+            </blockquote>
+
+            <button type="button" class="btn btn-outline-primary">Cadastro</button>
+            <button type="button" class="btn btn-outline-secondary">Buscar</button>
+            <button type="button" class="btn btn-outline-success">Editar</button>
+            <button type="button" class="btn btn-outline-danger">Excluir</button>
+
+        </div>
+    </section>
+
+
+    <div  class= "border border-primary" >
+        Realize o cadastro dos produtos...
+
+        <form id="form_create">
+            
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome"  class= "form-control" placeholder="Insira o nome do produto" required>
+                </div>
+                <div class="form-group col-md-1">
+                    <label for="qnt">Quantidade</label>
+                    <input id="qnt"  class= "form-control" type="number" required>
+                </div>
+            </div>
+            <div class="form-group col-md-1">
+                <label for="preco">Valor</label>
+                <input id="preco"  class= "form-control" type="number" required>
+            </div>
+            <button type="submit" id="btn_cadastrar" class="btn btn-outline-primary" onclick="create()">Cadastrar</button>
+
+
+        </form>
+
+    </div>  
+
+<!-- 
+    <div class= table>
+
+
+
+
+            <table class="table">
+         <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Quantidade</th>
+      <th scope="col">Preço</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+    </div>
+-->
+
+    <script>
+    //create
+    function create(){
+            let obj = {};
+            obj.nome = document.getElementById('nome').value;
+            obj.quantidade = document.getElementById('qnt').value;
+            obj.preco = document.getElementById('preco').value;
+
+
+            $.ajax({
+                type: "POST",
+                url: "./Service/createProduto.php",
+                dataType: "html",
+                async: true,
+                timeout: 30000,
+                data: {data: JSON.stringify(obj)} });
+
+            
+
+
+
+        
+        }
+
+    </script>
+
+
+<button id="listar" onclick="create()"">Clica aqui para testar listagem</button>
+
+    
+
+</body>
+
+</html>

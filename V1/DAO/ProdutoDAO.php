@@ -8,7 +8,7 @@ include_once '/DAO/Produto.php';
 
 Class ProdutoDAO{
 
-  static  function create ( Produto $dto){
+    function create ( Produto $dto){
         
         $conn = getConexao()
         //criando SQL comando enviado para o banco de dados.
@@ -18,15 +18,11 @@ Class ProdutoDAO{
         $stmt = $conn->prepare($sql)
 
         //setando os valores capturados.
-        $stmt = $conn->bindValue(1 , $dto);
-        $stmt = $conn->bindValue(2 , $dto);
-        $stmt = $conn->bindValue(3 , $dto);
-
+        $stmt = $conn->bindValue(1 , $dto->getNome(), PDO::PARAM_STR);
+        $stmt = $conn->bindValue(2 , $dto->getQuantidade(), PDO::PARAM_INT);
+        $stmt = $conn->bindValue(3 , $dto->getPreco(), PDO::PARAM_INT);
 
         $stmt->execute();
-        $id = $conn->lastInsertId();
-
-    }
 
 
         function read (){
@@ -40,10 +36,7 @@ Class ProdutoDAO{
             $result = $stmt->fetchall();
 
             foreach ($result as $value) {
-                
                             }
-
-
 
 
 
